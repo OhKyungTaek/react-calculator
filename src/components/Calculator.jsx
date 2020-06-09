@@ -50,17 +50,24 @@ class Calculator extends React.Component {
       },
       BS: () => {
         if (displayValue.length > 0) {
-          displayValue = displayValue.substr(0, displayValue.length - 1);
+          displayValue = displayValue.substr(0, displayValue.length - 2);
         }
       },
       // TODO: 제곱근 구현
       "√": () => {
-        
+        if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
+          displayValue = displayValue.replace(/×/gi, "*");
+          displayValue = displayValue.replace(/÷/gi, "/");
+          let result = Math.sqrt(evalFunc(displayValue));
+          this.setState({ displayValue: result});
+        }
+        // displayValue = displayValue.replace(/√/gi, "Math.sqrt");
+        // displayValue = evalFunc(displayValue);
       },
       // TODO: 사칙연산 구현
       "÷": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
-          this.setState({ displayValue: displayValue + "/" });
+          this.setState({ displayValue: displayValue + "÷" });
         }
       },
       "×": () => {
@@ -112,11 +119,14 @@ class Calculator extends React.Component {
         <Panel>
           <Display displayValue={this.state.displayValue} />
           <ButtonGroup onClickButton={this.onClickButton}>
-            <Button size={2} color="gray">
+            <Button size={1} color="gray">
               AC
             </Button>
             <Button size={1} color="gray">
               BS
+            </Button>
+            <Button size={1} color="gray">
+              √
             </Button>
             <Button size={1} color="gray">
               ÷
