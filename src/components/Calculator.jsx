@@ -50,7 +50,8 @@ class Calculator extends React.Component {
       },
       BS: () => {
         if (displayValue.length > 0) {
-          displayValue = displayValue.substr(0, displayValue.length - 2);
+          displayValue = displayValue.substr(0, displayValue.length - 1);
+          this.setState({ displayValue: displayValue});
         }
       },
       // TODO: 제곱근 구현
