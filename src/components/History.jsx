@@ -56,7 +56,7 @@ class History extends React.Component {
       onClick={() => this.clickFomulaButton(data.formula)}
       >
         {data.formula}
-        {" = " + data.result}
+        {"= " + data.result}
       </Box>
     })
   }
