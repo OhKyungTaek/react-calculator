@@ -68,7 +68,7 @@ class History extends React.Component {
 
   render() {//data-testid="history"
     return (
-      <Container data-testid="history" class="his">
+      <Container data-testid="history">
         {this.listOfButtons()}
       </Container>
     );
