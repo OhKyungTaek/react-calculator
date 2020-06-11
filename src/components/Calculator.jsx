@@ -80,15 +80,32 @@ class Calculator extends React.Component {
         }
       },
       "=": () => {
+        let isRoot = false;
+        let beforeRootDeletedData;
+        let innerData;
+        let firstValue = displayValue.substr(0, 1);
+        if(firstValue == "√"){
+          isRoot = true;
+          beforeRootDeletedData = displayValue;
+          console.log(displayValue);
+          displayValue = displayValue.substr(2, displayValue.length - 3);
+          displayValue = (Math.sqrt(displayValue) + "");
+        }else{
+          displayValue = displayValue
+        }
         if (lastChar !== "" && operatorKeys.includes(lastChar)) {
           displayValue = displayValue.substr(0, displayValue.length - 1);
+          isRoot = false;
         } else if (lastChar !== "") {
           const rawFomula2 = "" + displayValue;
           displayValue = displayValue.replace(/×/gi, "*");
           displayValue = displayValue.replace(/÷/gi, "/");
           displayValue = evalFunc(displayValue);
-          const innerData = {formula: rawFomula2, result: displayValue};
+          innerData = {formula: rawFomula2, result: displayValue};
           this.state.formular.unshift(innerData);
+        }
+        if(isRoot){
+          innerData.formula = beforeRootDeletedData;
         }
         this.setState({ displayValue });
       },
