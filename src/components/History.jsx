@@ -49,7 +49,6 @@ class History extends React.Component {
       firstValue = data
     }
 
-    console.log(firstValue);
     this.props.onClickedPastData(firstValue);
   }
 
@@ -70,9 +69,10 @@ class History extends React.Component {
 
   render() {//data-testid="history"
     return (
-    <Container data-testid="history">
-      {this.listOfButtons()}
-    </Container>);
+      <Container data-testid="history" class="his">
+        {this.listOfButtons()}
+      </Container>
+    );
   }
 }
 
