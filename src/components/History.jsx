@@ -42,13 +42,6 @@ class History extends React.Component {
   }
 
   clickFomulaButton(data) {
-    // let firstValue = data.substr(0, 1);
-    // if(firstValue == "√"){
-    //   firstValue = data.substr(2, data.length - 3);
-    // }else{
-    //   firstValue = data
-    // }
-
     this.props.onClickedPastData(data);
   }
 
@@ -66,7 +59,7 @@ class History extends React.Component {
     })
   }
 
-  render() {//data-testid="history"
+  render() {
     return (
       <Container data-testid="history">
         {this.listOfButtons()}

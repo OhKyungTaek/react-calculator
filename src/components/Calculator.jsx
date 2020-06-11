@@ -6,7 +6,6 @@ import Display from "./Display";
 import ButtonGroup from "./ButtonGroup";
 import Button from "./Button";
 import History from "./History";
-import HistoryButton from "./HistoryButton";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -48,12 +47,7 @@ class Calculator extends React.Component {
       "√": () => {
         let rootedData = displayValue;
         let firstValue = displayValue.substr(0, 1);
-        let isRootFormula = firstValue; 
-        // if(firstValue == "√"){
-        //   displayValue = displayValue.substr(2, displayValue.length - 3);
-        //   displayValue = Math.sqrt(displayValue);
-        //   displayValue = displayValue + "";
-        // }
+        let isRootFormula = firstValue;
         if(firstValue == "√"){
           do{
             displayValue = displayValue.substr(2, displayValue.length - 3);
@@ -223,10 +217,6 @@ class Calculator extends React.Component {
         formular={this.state.formular}
         onClickedPastData = {data => this.clickedPastData(data)}
         >
-            {/* <HistoryButton
-            formular={this.state.formular}
-            onClickedPastData = {data => this.clickedPastData(data)}
-            ></HistoryButton> */}
         </History>
       </Container>
     );
