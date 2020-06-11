@@ -49,6 +49,8 @@ class Calculator extends React.Component {
         let firstValue = displayValue.substr(0, 1);
         if(firstValue == "√"){
           displayValue = displayValue.substr(2, displayValue.length - 3);
+          displayValue = Math.sqrt(displayValue);
+          displayValue = displayValue + "";
         }else{
           displayValue = displayValue;
         }
