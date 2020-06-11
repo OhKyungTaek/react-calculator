@@ -5,7 +5,6 @@ const Container = styled.div`
   float: left;
   width: ${p => (p.size / 4) * 100}%;
   padding: 5px;
-  margin: (0, 0, 0, 10px)
   button {
     :focus {
       outline: none;
@@ -35,6 +34,23 @@ const Container = styled.div`
     }
   }
 `;
+
+const Box = styled.div`
+  display: inline-block;
+  width: 270px;
+  height: 65px;
+  padding: 10px;
+  border: 2px solid #000;
+  border-radius: 5px;
+  text-align: right;
+  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+  cursor: pointer;
+  h3 {
+    margin: 0px;
+  }
+`;
+
 // font-weight: bold; line-height: 60px;
 class Button extends React.Component {
   constructor(props){
@@ -59,14 +75,14 @@ class Button extends React.Component {
     let listOfData = this.props.formular;
     let index;
     return listOfData.map((data, index) => {
-      return <button 
+      return <Box 
       key={index}
       onClick={() => this.clickFomulaButton(data.formula)}
       >
         {data.formula}
         <br/>
         {"=" + data.result}
-      </button>
+      </Box>
     })
   }
 

@@ -13,22 +13,9 @@ const Container = styled.div`
   text-align: center;
 `;
 
+//Box는 HistoryButton.jsx에 있음
+
 // TODO: History 내에서 수식 표시할 때 사용
-const Box = styled.div`
-  display: inline-block;
-  width: 270px;
-  height: 65px;
-  padding: 10px;
-  border: 2px solid #000;
-  border-radius: 5px;
-  text-align: right;
-  box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  margin-bottom: 10px;
-  cursor: pointer;
-  h3 {
-    margin: 0px;
-  }
-`;
 
 const evalFunc = function(string) {
   // eslint-disable-next-line no-new-func
@@ -65,7 +52,6 @@ class Calculator extends React.Component {
           displayValue = displayValue.replace(/÷/gi, "/");
           let result = Math.sqrt(evalFunc(displayValue));
           const innerData = {formula: rawFomula, result: result};
-          // this.state.formular.push(innerData);
           this.state.formular.unshift(innerData);
           // formular
           this.setState({ displayValue: result});
@@ -102,12 +88,28 @@ class Calculator extends React.Component {
           displayValue = displayValue.replace(/÷/gi, "/");
           displayValue = evalFunc(displayValue);
           const innerData = {formula: rawFomula2, result: displayValue};
-          // this.state.formular.push(innerData);
           this.state.formular.unshift(innerData);
         }
         this.setState({ displayValue });
       },
-      ".": () => {},
+      ".": () => {
+        let displayTemp = (displayValue + ".");
+        let idx = -1;
+        let cnt = 0;
+
+        do  {
+            idx = displayTemp.indexOf('.', idx + 1);
+            if(idx != -1) {
+                cnt++;
+            }
+        } while(idx != -1);
+
+        if(cnt > 1)
+          this.setState({ displayValue: displayValue});
+        else
+          this.setState({ displayValue: displayTemp});
+        
+      },
       "0": () => {
         if (Number(displayValue) !== 0) {
           displayValue += "0";
