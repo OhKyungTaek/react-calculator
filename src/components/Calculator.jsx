@@ -180,11 +180,13 @@ class Calculator extends React.Component {
           </ButtonGroup>
         </Panel>
         {/* TODO: History componet를 이용해 map 함수와 Box styled div를 이용해 history 표시 */}
-        <History>
-            <HistoryButton
+        <History
+        formular={this.state.formular}
+        onClickedPastData = {data => this.clickedPastData(data)}>
+            {/* <HistoryButton
             formular={this.state.formular}
             onClickedPastData = {data => this.clickedPastData(data)}
-            ></HistoryButton>
+            ></HistoryButton> */}
         </History>
       </Container>
     );
