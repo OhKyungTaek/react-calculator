@@ -13,7 +13,7 @@ const Container = styled.div`
 
 class Panel extends React.Component {
   render() {
-    return <Container>{this.props.children}</Container>;
+    return (<Container>{this.props.children}</Container>);
   }
 }
 

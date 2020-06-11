@@ -5,6 +5,8 @@ import Panel from "./Panel";
 import Display from "./Display";
 import ButtonGroup from "./ButtonGroup";
 import Button from "./Button";
+import History from "./History";
+import HistoryButton from "./HistoryButton";
 
 const Container = styled.div`
   margin: 30px auto;
@@ -36,7 +38,8 @@ const evalFunc = function(string) {
 class Calculator extends React.Component {
   // TODO: history 추가
   state = {
-    displayValue: ""
+    displayValue: "",
+    formular: []
   };
 
   onClickButton = key => {
@@ -57,13 +60,16 @@ class Calculator extends React.Component {
       // TODO: 제곱근 구현
       "√": () => {
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
+          const rawFomula = "√(" + displayValue + ")";
           displayValue = displayValue.replace(/×/gi, "*");
           displayValue = displayValue.replace(/÷/gi, "/");
           let result = Math.sqrt(evalFunc(displayValue));
+          const innerData = {formula: rawFomula, result: result};
+          // this.state.formular.push(innerData);
+          this.state.formular.unshift(innerData);
+          // formular
           this.setState({ displayValue: result});
         }
-        // displayValue = displayValue.replace(/√/gi, "Math.sqrt");
-        // displayValue = evalFunc(displayValue);
       },
       // TODO: 사칙연산 구현
       "÷": () => {
@@ -91,9 +97,13 @@ class Calculator extends React.Component {
         if (lastChar !== "" && operatorKeys.includes(lastChar)) {
           displayValue = displayValue.substr(0, displayValue.length - 1);
         } else if (lastChar !== "") {
+          const rawFomula2 = "" + displayValue;
           displayValue = displayValue.replace(/×/gi, "*");
           displayValue = displayValue.replace(/÷/gi, "/");
           displayValue = evalFunc(displayValue);
+          const innerData = {formula: rawFomula2, result: displayValue};
+          // this.state.formular.push(innerData);
+          this.state.formular.unshift(innerData);
         }
         this.setState({ displayValue });
       },
@@ -113,6 +123,12 @@ class Calculator extends React.Component {
       this.setState({ displayValue: displayValue + key });
     }
   };
+
+  clickedPastData(data){
+    this.setState({
+      displayValue: data
+    });
+  }
 
   render() {
     return (
@@ -162,7 +178,12 @@ class Calculator extends React.Component {
           </ButtonGroup>
         </Panel>
         {/* TODO: History componet를 이용해 map 함수와 Box styled div를 이용해 history 표시 */}
-
+        <History>
+            <HistoryButton
+            formular={this.state.formular}
+            onClickedPastData = {data => this.clickedPastData(data)}
+            ></HistoryButton>
+        </History>
       </Container>
     );
   }
