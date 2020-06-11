@@ -100,12 +100,21 @@ class Calculator extends React.Component {
         let beforeRootDeletedData;
         let innerData;
         let firstValue = displayValue.substr(0, 1);
+        let count=0, i=0;
         if(firstValue == "√"){
           isRoot = true;
           beforeRootDeletedData = displayValue;
-          console.log(displayValue);
-          displayValue = displayValue.substr(2, displayValue.length - 3);
-          displayValue = (Math.sqrt(displayValue) + "");
+
+          do{
+            displayValue = displayValue.substr(2, displayValue.length - 3);
+            firstValue = displayValue.substr(0, 1);
+            count++;
+          }while(firstValue == "√");
+
+          for(i=0; i<count; i++){
+            displayValue = Math.sqrt(displayValue);
+            displayValue = displayValue + "";
+          }
         }else{
           displayValue = displayValue
         }
