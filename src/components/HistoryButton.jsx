@@ -55,7 +55,6 @@ class Button extends React.Component {
     this.props.onClickedPastData(firstValue);
   }
 
-
   listOfButtons(){
     let listOfData = this.props.formular;
     let index;
