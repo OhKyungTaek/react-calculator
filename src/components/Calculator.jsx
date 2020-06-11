@@ -46,16 +46,30 @@ class Calculator extends React.Component {
       },
       // TODO: 제곱근 구현
       "√": () => {
+        let rootedData = displayValue;
         let firstValue = displayValue.substr(0, 1);
+        let isRootFormula = firstValue; 
+        // if(firstValue == "√"){
+        //   displayValue = displayValue.substr(2, displayValue.length - 3);
+        //   displayValue = Math.sqrt(displayValue);
+        //   displayValue = displayValue + "";
+        // }
         if(firstValue == "√"){
-          displayValue = displayValue.substr(2, displayValue.length - 3);
+          do{
+            displayValue = displayValue.substr(2, displayValue.length - 3);
+            firstValue = displayValue.substr(0, 1);
+          }while(firstValue == "√");
           displayValue = Math.sqrt(displayValue);
           displayValue = displayValue + "";
         }else{
           displayValue = displayValue;
         }
         if (lastChar !== "" && !operatorKeys.includes(lastChar)) {
-          const rawFomula = "√(" + displayValue + ")";
+          let rawFomula = ""; // = "√(" + displayValue + ")";
+          if(isRootFormula == "√")
+            rawFomula = "√(" + rootedData + ")";
+          else
+            rawFomula = "√(" + displayValue + ")";
           displayValue = displayValue.replace(/×/gi, "*");
           displayValue = displayValue.replace(/÷/gi, "/");
           let result = Math.sqrt(evalFunc(displayValue));
