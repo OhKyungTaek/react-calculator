@@ -31,7 +31,9 @@ const Box = styled.div`
   h3 {
     margin: 0px;
   }
-`;
+  font-size:18px;
+  font-weight: bold;
+!important`;
 
 // TODO: Panel 을 참고해서 History component 생성 및 export
 class History extends React.Component {
@@ -54,7 +56,7 @@ class History extends React.Component {
       onClick={() => this.clickFomulaButton(data.formula)}
       >
         {data.formula}
-        {"= " + data.result}
+        {" = " + data.result}
       </Box>
     })
   }
