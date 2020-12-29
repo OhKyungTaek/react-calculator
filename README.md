@@ -1,5 +1,3 @@
-# React Calculator
-
 ## With npm
 ```
 npm i
