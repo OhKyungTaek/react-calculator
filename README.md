@@ -1,4 +1,4 @@
-### React Calculator
+# React Calculator
 
 ## With npm
 ```
